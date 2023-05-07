@@ -1,48 +1,71 @@
-# Getting Started with Create React App
+React - react-responsive
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Стек: React, typescript, сборка - microbundle/rollup
 
-## Available Scripts
+Надо реализовать react hook и компонент для работы с https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList
+Пример работы хука
 
-In the project directory, you can run:
+useMediaQuery.ts
 
-### `npm start`
+import React from 'react'
+import { useMediaQuery } from '@my-npm-user/react-responsive'
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+const Example = () => {
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-width: 1224px)'
+  })
+  const isBigScreen = useMediaQuery({ query: '(min-width: 1824px)' })
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
+  const isPortrait = useMediaQuery({ query: '(orientation: portrait)' })
+  const isRetina = useMediaQuery({ query: '(min-resolution: 2dppx)' })
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+  return <div>
+    <h1>Device Test!</h1>
+    {isDesktopOrLaptop && <p>You are a desktop or laptop</p>}
+    {isBigScreen && <p>You  have a huge screen</p>}
+    {isTabletOrMobile && <p>You are a tablet or mobile phone</p>}
+    <p>Your are in {isPortrait ? 'portrait' : 'landscape'} orientation</p>
+    {isRetina && <p>You are retina</p>}
+  </div>
+}
 
-### `npm test`
+Пример работы компонента
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+MediaQuery.tsx
 
-### `npm run build`
+import React from 'react'
+import MediaQuery from '@my-npm-user/react-responsive'
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+const Example = () => (
+  <div>
+    <h1>Device Test!</h1>
+    <MediaQuery minWidth={1224}>
+      <p>You are a desktop or laptop</p>
+      <MediaQuery minWidth={1824}>
+        <p>You also have a huge screen</p>
+      </MediaQuery>
+    </MediaQuery>
+    <MediaQuery minResolution="2dppx"> {/* @media (-webkit-min-device-pixel-ratio: 2) */}
+      {/* You can also use a function (render prop) as a child */}
+      {(matches) =>
+        matches
+          ? <p>You are retina</p>
+          : <p>You are not retina</p>
+      }
+    </MediaQuery>
+  </div>
+)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Ожидаемые props этого компонента:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+orientation
+minResolution
+maxResolution
+minWidth
+maxWidth
+minHeight
+maxHeight
 
-### `npm run eject`
+Дополнительно:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-# test-work-3-react-responsive
-# test-work-3-react-responsive
+    Типизировать minResolution, чтобы можно было указать либо строку вида "{число}dppx", либо просто number (то есть чтобы и так и так можно было, а строка только определённого вида)
