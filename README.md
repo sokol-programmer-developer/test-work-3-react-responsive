@@ -29,7 +29,7 @@ const Example = () => {
     <p>Your are in {isPortrait ? 'portrait' : 'landscape'} orientation</p>
     {isRetina && <p>You are retina</p>}
   </div>
-}
+
 
 Пример работы компонента
 
@@ -56,7 +56,7 @@ const Example = () => (
       }
     </MediaQuery>
   </div>
-)
+
 
 Ожидаемые props этого компонента:
 
