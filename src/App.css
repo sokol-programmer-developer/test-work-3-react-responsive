@@ -1,0 +1,38 @@
+
+
+.App {
+ display: grid;
+ position: relative;
+ width: 100vw;
+ height: 100vh;
+ justify-content: center;
+ justify-items: center;
+ align-content: center;
+ align-items: center;
+}
+
+.navigation__section{
+  display: grid;
+ position: relative;
+ width: 30vw;
+ height: 10vh;
+ justify-content: center;
+ justify-items: center;
+ align-content: center;
+ align-items: center;
+}
+
+button{
+ display: grid;
+ position: relative;
+ grid-template-columns: repeat(2,1fr);
+ width: 15vw;
+ height: 5vh;
+ justify-content: center;
+ justify-items: center;
+ align-content: center;
+ align-items: center;
+
+ font-size: 2vh;
+ font-weight: 400;
+}
