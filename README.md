@@ -58,6 +58,7 @@ const Example = () => (
   </div>
 
 
+
 Ожидаемые props этого компонента:
 
 orientation
